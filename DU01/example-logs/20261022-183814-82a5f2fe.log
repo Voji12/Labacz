@@ -1,0 +1,565 @@
+SHRNUTÍ BĚHU
+{
+  "run_id": "20261022-183814-82a5f2fe",
+  "status": "SUCCESS",
+  "started_at": "2026-10-22T18:38:14.337+02:00",
+  "finished_at": "2026-10-22T18:38:15.801+02:00",
+  "duration_s": 1.463,
+  "endpoint": "https://api.runpod.ai/v2/REDACTED_ENDPOINT_ID/runsync",
+  "python": "3.12.13",
+  "steps": 2,
+  "model_calls": [
+    {
+      "step": 1,
+      "job_id": "example-job-3",
+      "worker_id": "example-worker-1",
+      "model": "QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ",
+      "duration_s": 0.82,
+      "queue_ms": 52,
+      "execution_ms": 533,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 29,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 306,
+        "prompt_tokens_details": null,
+        "total_tokens": 335
+      }
+    },
+    {
+      "step": 2,
+      "job_id": "example-job-4",
+      "worker_id": "example-worker-1",
+      "model": "QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ",
+      "duration_s": 0.641,
+      "queue_ms": 53,
+      "execution_ms": 382,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 15,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 355,
+        "prompt_tokens_details": null,
+        "total_tokens": 370
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "step": 1,
+      "tool_call_id": "example-tool-2",
+      "name": "add",
+      "arguments": {
+        "a": 123,
+        "b": 456
+      },
+      "result": 579,
+      "duration_ms": 0.001
+    }
+  ],
+  "tokens": {
+    "prompt_tokens": 661,
+    "completion_tokens": 44,
+    "total_tokens": 705
+  },
+  "event_count": 20
+}
+
+ČASOVÁ OSA
+
+[2026-10-22T18:38:14.337+02:00] +0.000s [INFO] [krok 0] Zahajuji běh
+{
+  "run_id": "20261022-183814-82a5f2fe"
+}
+
+[2026-10-22T18:38:14.338+02:00] +0.001s [INFO] [krok 0] Start kalkulačky — nativní tool calling
+{
+  "endpoint": "https://api.runpod.ai/v2/REDACTED_ENDPOINT_ID/runsync",
+  "max_steps": 5,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add",
+        "description": "Add two numbers and return their sum.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "First number"
+            },
+            "b": {
+              "type": "number",
+              "description": "Second number"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "multiply",
+        "description": "Multiply two numbers and return their product.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "First number"
+            },
+            "b": {
+              "type": "number",
+              "description": "Second number"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "question": "Kolik je 123 + 456?"
+}
+
+[2026-10-22T18:38:14.338+02:00] +0.001s [INFO] [krok 1] KROK 1/5 — volání modelu (tool_choice=auto)
+
+[2026-10-22T18:38:14.338+02:00] +0.001s [INFO] [krok 1] Historie konverzace před voláním modelu
+[
+  {
+    "role": "system",
+    "content": "You are a helpful assistant. Use the available tools for arithmetic. After receiving the tool result, explain the answer naturally in Czech."
+  },
+  {
+    "role": "user",
+    "content": "Kolik je 123 + 456?"
+  }
+]
+
+[2026-10-22T18:38:14.338+02:00] +0.001s [INFO] [krok 1] POST https://api.runpod.ai/v2/REDACTED_ENDPOINT_ID/runsync — odesílám požadavek (limit HTTP 300 s)
+{
+  "input": {
+    "openai_route": "/v1/chat/completions",
+    "openai_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Use the available tools for arithmetic. After receiving the tool result, explain the answer naturally in Czech."
+        },
+        {
+          "role": "user",
+          "content": "Kolik je 123 + 456?"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "add",
+            "description": "Add two numbers and return their sum.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "number",
+                  "description": "First number"
+                },
+                "b": {
+                  "type": "number",
+                  "description": "Second number"
+                }
+              },
+              "required": [
+                "a",
+                "b"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "multiply",
+            "description": "Multiply two numbers and return their product.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "number",
+                  "description": "First number"
+                },
+                "b": {
+                  "type": "number",
+                  "description": "Second number"
+                }
+              },
+              "required": [
+                "a",
+                "b"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ],
+      "tool_choice": "auto",
+      "max_tokens": 512,
+      "temperature": 0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  }
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] HTTP 200
+{
+  "duration_s": 0.810355,
+  "response_bytes": 1027
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] Odpověď Runpod API
+{
+  "delayTime": 52,
+  "executionTime": 533,
+  "id": "example-job-3",
+  "output": [
+    {
+      "choices": [
+        {
+          "finish_reason": "tool_calls",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "annotations": null,
+            "audio": null,
+            "content": null,
+            "function_call": null,
+            "reasoning": null,
+            "refusal": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"a\": 123, \"b\": 456}",
+                  "name": "add"
+                },
+                "id": "example-tool-2",
+                "type": "function"
+              }
+            ]
+          },
+          "routed_experts": null,
+          "stop_reason": null,
+          "token_ids": null
+        }
+      ],
+      "created": 1792687094,
+      "ec_transfer_params": null,
+      "id": "example-completion-3",
+      "kv_transfer_params": null,
+      "metrics": null,
+      "model": "QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ",
+      "object": "chat.completion",
+      "prompt_logprobs": null,
+      "prompt_text": null,
+      "prompt_token_ids": null,
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.28.0-e635db39",
+      "usage": {
+        "completion_tokens": 29,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 306,
+        "prompt_tokens_details": null,
+        "total_tokens": 335
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "workerId": "example-worker-1"
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] Volání modelu dokončeno za 0.82 s
+{
+  "worker": "example-worker-1",
+  "delayTime_ms": 52,
+  "executionTime_ms": 533,
+  "message": {
+    "annotations": null,
+    "audio": null,
+    "content": null,
+    "function_call": null,
+    "reasoning": null,
+    "refusal": null,
+    "role": "assistant",
+    "tool_calls": [
+      {
+        "function": {
+          "arguments": "{\"a\": 123, \"b\": 456}",
+          "name": "add"
+        },
+        "id": "example-tool-2",
+        "type": "function"
+      }
+    ]
+  }
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] LLM vybralo nástroje — skutečné API tool_calls
+[
+  {
+    "function": {
+      "arguments": "{\"a\": 123, \"b\": 456}",
+      "name": "add"
+    },
+    "id": "example-tool-2",
+    "type": "function"
+  }
+]
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] Python spouští add
+{
+  "a": 123,
+  "b": 456
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] Výsledek Python funkce add
+579
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 1] Výsledek vracím LLM jako skutečnou zprávu role=tool
+{
+  "role": "tool",
+  "tool_call_id": "example-tool-2",
+  "name": "add",
+  "content": "{\"result\": 579}"
+}
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 2] KROK 2/5 — volání modelu (tool_choice=auto)
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 2] Historie konverzace před voláním modelu
+[
+  {
+    "role": "system",
+    "content": "You are a helpful assistant. Use the available tools for arithmetic. After receiving the tool result, explain the answer naturally in Czech."
+  },
+  {
+    "role": "user",
+    "content": "Kolik je 123 + 456?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "function": {
+          "arguments": "{\"a\": 123, \"b\": 456}",
+          "name": "add"
+        },
+        "id": "example-tool-2",
+        "type": "function"
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "example-tool-2",
+    "name": "add",
+    "content": "{\"result\": 579}"
+  }
+]
+
+[2026-10-22T18:38:15.158+02:00] +0.821s [INFO] [krok 2] POST https://api.runpod.ai/v2/REDACTED_ENDPOINT_ID/runsync — odesílám požadavek (limit HTTP 300 s)
+{
+  "input": {
+    "openai_route": "/v1/chat/completions",
+    "openai_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant. Use the available tools for arithmetic. After receiving the tool result, explain the answer naturally in Czech."
+        },
+        {
+          "role": "user",
+          "content": "Kolik je 123 + 456?"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"a\": 123, \"b\": 456}",
+                "name": "add"
+              },
+              "id": "example-tool-2",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "example-tool-2",
+          "name": "add",
+          "content": "{\"result\": 579}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "add",
+            "description": "Add two numbers and return their sum.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "number",
+                  "description": "First number"
+                },
+                "b": {
+                  "type": "number",
+                  "description": "Second number"
+                }
+              },
+              "required": [
+                "a",
+                "b"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "multiply",
+            "description": "Multiply two numbers and return their product.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "number",
+                  "description": "First number"
+                },
+                "b": {
+                  "type": "number",
+                  "description": "Second number"
+                }
+              },
+              "required": [
+                "a",
+                "b"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ],
+      "tool_choice": "auto",
+      "max_tokens": 512,
+      "temperature": 0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  }
+}
+
+[2026-10-22T18:38:15.799+02:00] +1.462s [INFO] [krok 2] HTTP 200
+{
+  "duration_s": 0.63984,
+  "response_bytes": 898
+}
+
+[2026-10-22T18:38:15.799+02:00] +1.462s [INFO] [krok 2] Odpověď Runpod API
+{
+  "delayTime": 53,
+  "executionTime": 382,
+  "id": "example-job-4",
+  "output": [
+    {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "annotations": null,
+            "audio": null,
+            "content": "123 + 456 je 579.",
+            "function_call": null,
+            "reasoning": null,
+            "refusal": null,
+            "role": "assistant"
+          },
+          "routed_experts": null,
+          "stop_reason": null,
+          "token_ids": null
+        }
+      ],
+      "created": 1792687095,
+      "ec_transfer_params": null,
+      "id": "example-completion-4",
+      "kv_transfer_params": null,
+      "metrics": null,
+      "model": "QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ",
+      "object": "chat.completion",
+      "prompt_logprobs": null,
+      "prompt_text": null,
+      "prompt_token_ids": null,
+      "service_tier": null,
+      "system_fingerprint": "vllm-0.28.0-e635db39",
+      "usage": {
+        "completion_tokens": 15,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 355,
+        "prompt_tokens_details": null,
+        "total_tokens": 370
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "workerId": "example-worker-1"
+}
+
+[2026-10-22T18:38:15.800+02:00] +1.463s [INFO] [krok 2] Volání modelu dokončeno za 0.64 s
+{
+  "worker": "example-worker-1",
+  "delayTime_ms": 53,
+  "executionTime_ms": 382,
+  "message": {
+    "annotations": null,
+    "audio": null,
+    "content": "123 + 456 je 579.",
+    "function_call": null,
+    "reasoning": null,
+    "refusal": null,
+    "role": "assistant"
+  }
+}
+
+[2026-10-22T18:38:15.800+02:00] +1.463s [INFO] [krok 2] HOTOVO — lidsky čitelná odpověď LLM
+"123 + 456 je 579."
+
+[2026-10-22T18:38:15.800+02:00] +1.463s [INFO] [krok 2] Konec běhu
+{
+  "status": "SUCCESS"
+}

@@ -1,0 +1,9 @@
+# Local credentials and generated files
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+logs/
+.DS_Store
